@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            background-color: #f5f5f5; /* Add a subtle background color */
+        }
+
+        .container {
+            width: 50%;
+            margin: 50px auto; /* Add some top margin */
+            padding: 30px;
+            border: 1px solid #ccc;
+            background-color: #fff; /* Form has a white background */
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease; /* For a smooth hover effect */
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Slightly darker on hover */
+        }
+
+        .error-messages {
+            background-color: #ffe0e0; /* Light red background */
+            border: 1px solid #f00; /* Red border */
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px; /* Slightly rounded corners*/
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Sign Up</h1>
+    {% if message %}
+        <div class="error-messages">
+            <h1>{{ message }}</h1>
+        </div>
+    {% endif %}
+    <form action="{% url 'user:signup' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password1">Password:</label>
+            <input type="password" id="password1" name="password1" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password2">Password Confirm:</label>
+            <input type="password" id="password2" name="password2" required>
+        </div>
+
+        <div class="form-group">
+            <label for="full_name">Full Name:</label>
+            <input type="text" id="full_name" name="full_name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <input type="tel" id="phone" name="phone" maxlength="11" required>
+            <label for="phone">Phone Number (Format: 0912-345-6789)</label>
+        </div>
+
+        <div class="form-group">
+            <input type="text" id="address" name="address" required>
+            <label for="address">Address: </label>
+        </div>
+
+        <div class="form-group">
+            <label for="country">Country:</label>
+            <select name="country" id="country">
+                {% for country in formatted_countries %}
+                    <option value="{{ country.code }}">{{ country.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender">
+                <option value="male">male</option>
+                <option value="female">female</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="role">Role:</label>
+            <select id="role" name="role">
+                <option value="normal">Normal</option>
+                <option value="agency">Agency</option>
+            </select>
+        </div>
+        <input type="submit" value="Submit">
+
+    </form>
+</div>
+<button type="submit"><a href={% url "user:login" %}>Login</a></button>
+<button type="submit" id="check-ticket"><a href={% url "ticket:check_ticket" %}>Check Ticket</a></button>
+
+</body>
+{% include 'footer.html' %}
+
+</html>

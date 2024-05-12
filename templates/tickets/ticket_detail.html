@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .ticket-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 5px;
+        }
+
+        .btn-centered {
+            text-align: center;
+            display: block; /* Makes it take up the full width */
+            margin-top: 10px; /* Adjust spacing as needed */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Ticket Details</h1>
+    {% if error %}
+        <h1>Your ticket did not found</h1>
+    {% endif %}
+    {% if ticket %}
+
+        <div class="ticket-container">
+            <p><strong>Ticket ID:</strong> {{ ticket.id }}</p>
+            <p><strong>User:</strong> {{ ticket.user }}</p>
+            <p><strong>Flight:</strong> {{ ticket.flight }}</p>
+            <p><strong>Seat Number:</strong> {{ ticket.seatID.seatNumber }}</p>
+            <p><strong>Price:</strong> ${{ ticket.price }}</p>
+            <p><strong>Unique ID:</strong> {{ ticket.unique_id }}</p>
+            <p><strong>Status:</strong>
+                {% if ticket.active %}
+                    Active
+                {% else %}
+                    Inactive
+                {% endif %}
+            </p>
+        </div>
+    {% endif %}
+    <div class="ticket-container">
+        <a href="{% url "flight:feed" %}" class="btn btn-primary btn-centered">Back to Home</a>
+    </div>
+</div>
+</body>
+</html>

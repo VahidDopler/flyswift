@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            background-color: #f5f5f5; /* Add a subtle background color */
+        }
+
+        .container {
+            width: 50%;
+            margin: 50px auto; /* Add some top margin */
+            padding: 30px;
+            border: 1px solid #ccc;
+            background-color: #fff; /* Form has a white background */
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease; /* For a smooth hover effect */
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Slightly darker on hover */
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1>Login</h1>
+            <form action="" method="post" href={% url "user:login" %}>
+                {% csrf_token %}
+                {% if message %}
+                    <div class="alert alert-danger">{{ message }}</div>
+                {% endif %}
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
+<button type="submit" id="signup"><a href={% url "user:signup" %}>Sign Up</a></button>
+<button type="submit" id="check-ticket"><a href={% url "ticket:check_ticket" %}>Check Ticket</a></button>
+
+</body>
+
+</html>
+
+
+
+

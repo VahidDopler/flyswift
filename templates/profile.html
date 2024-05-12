@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        .profile-section {
+            margin-bottom: 20px;
+        }
+
+        .profile-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f8f9fa; /* Light, subtle background  */
+        }
+
+        .btn-centered {
+            text-align: center;
+            display: block; /* Makes it take up the full width */
+            margin-top: 10px; /* Adjust spacing as needed */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>User Profile</h1>
+
+    <div class="profile-section">
+        <p><strong>Full Name:</strong> {{ user.full_name }}</p>
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Phone:</strong> {{ user.phone }}</p>
+        <p><strong>Gender:</strong> {{ user.gender }}</p>
+        <p><strong>Role:</strong> {{ user.role }}</p>
+        <p><strong>Charge:</strong> {{ user.charge }}</p>
+        <p><strong>Address:</strong> {{ user.address }}</p>
+        <p><strong>User unique:</strong> {{ user.pid }}</p>
+        <p><strong>Last login:</strong> {{ user.last_login }}</p>
+        {% if token %}
+            <p><strong>Your token:</strong> {{ token }}</p>
+        {% endif %}
+    </div>
+    <form method="POST" href="{% url 'user:profile' %}">
+        {% csrf_token %}
+
+        <button type="submit" class="btn btn-secondary">
+            Generate Token
+        </button>
+    </form>
+    <div class="ticket-container">
+        <a href="{% url "flight:feed" %}" class="btn btn-primary btn-centered">Back to Home</a>
+    </div>
+</div>
+</body>
+</html>
